@@ -1,5 +1,18 @@
 <script setup>
 console.log("Hello from the popup!");
+const openCustomTab = () => {
+  console.log("openCustomTab");
+  // The error message is probably because the content script is not injected yet.
+  // We can use the chrome.runtime API to send a message to the background script.
+  // The background script will then send a message to the content script, which will
+  // then open the form page.
+  // https://developer.chrome.com/docs/extensions/messaging/#connect
+  chrome.runtime.sendMessage({ type: "openCustomTab" }, function(response) {
+    if (chrome.runtime.lastError) {
+      console.error(chrome.runtime.lastError.message);
+    }
+  });
+}
 </script>
 
 <template>
@@ -9,6 +22,7 @@ console.log("Hello from the popup!");
     <p>
       Template: <code>vue-js</code>
     </p>
+    <button @click="openCustomTab">Open</button>
   </div>
 </template>
 

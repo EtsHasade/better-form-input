@@ -8,6 +8,8 @@
     "96": "icon/96.png",
     "128": "icon/128.png"
   },
+  "description": "Map inputs to a custom form beside the original content in a new tab using Vue 3",
+  "permissions": ["activeTab", "scripting", "tabs"],
   "{{chrome}}.action": {
     "default_popup": "src/popup.html"
   },
@@ -17,5 +19,11 @@
   "background": {
     "{{chrome}}.service_worker": "src/background.js",
     "{{firefox}}.scripts": ["src/background.js"]
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["src/form-tab.html", "src/form-tab.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
